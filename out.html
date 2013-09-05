@@ -1,0 +1,70 @@
+
+<head>
+<style>
+html,body,div {
+	padding: 0;
+	margin: 0;
+}
+body {
+	background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+	background-image: url(bg.jpg);
+	background-repeat:no-repeat;
+	background-position: center center;
+}
+div.main {
+	position: absolute;
+	display: block;
+	box-shadow: 0px 0px 20px rgba(200, 200, 200, 0.3);
+	background: rgba(200, 200, 200, 0.4);
+	border: 2px dashed white;
+	width: 450px;
+	height: 550px;
+	border-radius: 4px;
+	margin: auto auto;
+	padding: 10px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transition: all 500ms ease 500ms;
+}
+div.main:hover {
+	box-shadow: 0px 0px 20px rgba(150, 150, 150, 0.4);
+	background: rgba(180, 180, 180, 0.5);
+	-webkit-transition: background-color 500ms ease;
+	-moz-transition: background-color 500ms ease;
+	-o-transition: background-color 500ms ease;
+	-ms-transition: background-color 500ms ease;
+	transition: background-color 500ms ease;
+}
+div.main:hover div.row {
+	text-shadow: 0px 0px 30px white;
+	-webkit-transition: text-shadow 500ms ease;
+	-moz-transition: text-shadow 500ms ease;
+	-o-transition: text-shadow 500ms ease;
+	-ms-transition: text-shadow 500ms ease;
+	transition: text-shadow 500ms ease;
+}
+div.row {
+	font-family: Arial, Helvetica, Sans-Serif;
+	text-shadow: 0px 0px 10px white;
+	color: white;
+	font-size: 17px;
+	font-weight: bold;
+	border-bottom: 2px dotted black;
+	transition: all 500ms ease 500ms;
+}
+div.row::before {
+	content: "+ ";
+}
+</style>
+<link rel="shortcut icon" href="http://static.pixdip.com/favicon.ico" type="image/x-icon">
+<title>myxls</title>
+</head>
+<body><div class='main'><select><option value='SCOPE 1~'>SCOPE 1~</option><option value='SCOPE 2~'>SCOPE 2~</option><option value='Data Centre Noida~'>Data Centre Noida~</option><option value='PMI Noida~'>PMI Noida~</option><option value='CC- CANOPY 1~'>CC- CANOPY 1~</option><option value='CC- CANOPY 2~'>CC- CANOPY 2~</option><option value='NOIDA 6~'>NOIDA 6~</option><option value='Grt. Noida Netra CANOPY~'>Grt. Noida Netra CANOPY~</option><option value='ANTA~'>ANTA~</option><option value='AURAIYA~'>AURAIYA~</option><option value='BADARPUR~'>BADARPUR~</option><option value='FARIDABAD~'>FARIDABAD~</option><option value='DADRI~'>DADRI~</option><option value='HARIDWAR~'>HARIDWAR~</option><option value='CHANDIGARH~'>CHANDIGARH~</option><option value='JAIPUR~'>JAIPUR~</option><option value='NTPC-PFC~'>NTPC-PFC~</option><option value='HYDRABAD~'>HYDRABAD~</option><option value='KAYAMKULAM~'>KAYAMKULAM~</option><option value='RAMAGUNDAM~'>RAMAGUNDAM~</option><option value='SIMHADRI~'>SIMHADRI~</option><option value='BANGLORE~'>BANGLORE~</option><option value='CHENNAI~'>CHENNAI~</option><option value='RANIPET~'>RANIPET~</option><option value='TRICHIRAPALI~'>TRICHIRAPALI~</option><option value='TRIVENDRAM~'>TRIVENDRAM~</option><option value='RC PURAM HYDERABAD~'>RC PURAM HYDERABAD~</option><option value='DR HYDRABAD~'>DR HYDRABAD~</option><option value='DR HYDRABAD~'>DR HYDRABAD~</option><option value='KUDGI~'>KUDGI~</option><option value='BELGAON-WIND~'>BELGAON-WIND~</option><option value='MUMBAI~'>MUMBAI~</option><option value='JHANOR-GANDHAR~'>JHANOR-GANDHAR~</option><option value='KAWAS~'>KAWAS~</option><option value='BARODA~'>BARODA~</option><option value='SOLAPUR~'>SOLAPUR~</option><option value='MAUDA~'>MAUDA~</option><option value='PUNE~'>PUNE~</option><option value='RAIPUR~'>RAIPUR~</option><option value='BHOPAL~'>BHOPAL~</option><option value='KORBA~'>KORBA~</option><option value='JABALPUR~'>JABALPUR~</option><option value='SIPAT~'>SIPAT~</option><option value='VINDHYACHAL~'>VINDHYACHAL~</option><option value='KHARGAON~'>KHARGAON~</option><option value='GADARWARA~'>GADARWARA~</option><option value='BERETHI~'>BERETHI~</option><option value='KATWA~'>KATWA~</option><option value='PATNA~'>PATNA~</option><option value='BARH~'>BARH~</option><option value='NORTH KARANPURA~'>NORTH KARANPURA~</option><option value='FARAKKA~'>FARAKKA~</option><option value='KAHALGOAN~'>KAHALGOAN~</option><option value='CALCUTTA~'>CALCUTTA~</option><option value='RANCHI~'>RANCHI~</option><option value='BHUWNESHWAR~'>BHUWNESHWAR~</option><option value='TALCHAR SUPER~'>TALCHAR SUPER~</option><option value='TALCHAR THERMAL~'>TALCHAR THERMAL~</option><option value='BONGAIGOAN~'>BONGAIGOAN~</option><option value='DARIPALLI~'>DARIPALLI~</option><option value='GUWAHATI~'>GUWAHATI~</option><option value='DENKANAL GAJMARA~'>DENKANAL GAJMARA~</option><option value='LUCKNOW~'>LUCKNOW~</option><option value='UNCHAHAR~'>UNCHAHAR~</option><option value='RIHAND~'>RIHAND~</option><option value='SINGRAULI~'>SINGRAULI~</option><option value='TANDA~'>TANDA~</option><option value='ANPARA~'>ANPARA~</option><option value='BILHAUR~'>BILHAUR~</option><option value='KOLDAM~'>KOLDAM~</option><option value='LOHARINAGPALA~'>LOHARINAGPALA~</option><option value='TAPOVAN VAISHNOGAD~'>TAPOVAN VAISHNOGAD~</option><option value='RAMMAM~'>RAMMAM~</option><option value='LATA TAPOVAN~'>LATA TAPOVAN~</option><option value='KOLODYNE~'>KOLODYNE~</option><option value='HYDRO~'>HYDRO~</option><option value='PAKRI B HAZARIBAGH~'>PAKRI B HAZARIBAGH~</option><option value='DULANGA~'>DULANGA~</option><option value='RAIGARH GARGODA~'>RAIGARH GARGODA~</option><option value='RGPPL -CO~'>RGPPL -CO~</option><option value='RGPPL- MUMBAI~'>RGPPL- MUMBAI~</option><option value='RGPPL-DABHOL~'>RGPPL-DABHOL~</option><option value='NSPCL-CC~'>NSPCL-CC~</option><option value='NSPCL-ROURKELA~'>NSPCL-ROURKELA~</option><option value='NSPCL-DURGAPUR~'>NSPCL-DURGAPUR~</option><option value='NSPCL-BHILLAI~'>NSPCL-BHILLAI~</option><option value='JHAJJAR~'>JHAJJAR~</option><option value='ARAVALI NOIDA~'>ARAVALI NOIDA~</option><option value='NTCEL CHENNAI~'>NTCEL CHENNAI~</option><option value='KANTI~'>KANTI~</option><option value='BRBCL PATNA~'>BRBCL PATNA~</option><option value='CSES-CC~'>CSES-CC~</option><option value='CSES - PMI~'>CSES - PMI~</option><option value='EOC NOIDA~'>EOC NOIDA~</option><option value='CSES- NFL~'>CSES- NFL~</option><option value='HYDRO~'>HYDRO~</option><option value='Grt. Noida Netra~'>Grt. Noida Netra~</option><option value='CSES- DADRI~'>CSES- DADRI~</option><option value='CSES-CALCUTTA~'>CSES-CALCUTTA~</option><option value='CSES- JHAJJAR~'>CSES- JHAJJAR~</option><option value='ALLAHABAD MEJA~'>ALLAHABAD MEJA~</option><option value='UPL NOIDA~'>UPL NOIDA~</option><option value='CSES-DC~'>CSES-DC~</option></select></div></body>
