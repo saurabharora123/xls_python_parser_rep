@@ -58,7 +58,7 @@ for key_ in sheetdata.keys():
 	sheetdata[key_] = {}
 	sheetdata[key_]["locations"] = []
 	sheetdata[key_]["locations"].extend(locations)
-for key_ in sheetdata.keys(): print(sheetdata[key_]["locations"])
+for key_ in sheetdata.keys(): print("{}: ".format(key_).ljust(5), sheetdata[key_]["locations"])
 
 fwh = open(outlocation,"w+t")
 head = \
@@ -70,15 +70,15 @@ html,body,div {
 	margin: 0;
 }
 body {
-	background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
-	background-image: url(bg.jpg);
-	background-repeat:no-repeat;
+	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#00ffffff", GradientType=0); /* IE6-9 */
+	background-image: url("bg.jpg");
+	background-repeat: no-repeat;
 	background-position: center center;
 }
 div.main {
@@ -128,7 +128,7 @@ div.row::before {
 	content: "+ ";
 }
 </style>
-<link rel="shortcut icon" href="http://static.pixdip.com/favicon.ico" type="image/x-icon">
+<link rel='shortcut icon' href='http://static.pixdip.com/favicon.ico' type='image/x-icon'>
 <title>myxls</title>
 </head>
 '''
@@ -146,15 +146,15 @@ root.clipboard_clear()
 root.clipboard_append(set_)
 root.mainloop() # style
 #
-print(list(set([x for x in set_ if set_.count(x) > 1])))
+print("Duplicates: ", list(set([x for x in set_ if set_.count(x) > 1])))
 
-if(1):
-	write("<select>",fwh)
-	for location in sheetdata[keys[0]]["locations"]:
-		write("<option value='{0}'>{0}</option>".format(location),fwh)
-		# write("<div class='row'></div>",fwh)
-	write("</select>",fwh)
-else: raise ValueError("Something went wrong: [.xls files have dissimilar 'location' column]")
+
+write("<select>",fwh)
+for i,location in enumerate(sheetdata[keys[0]]["locations"]):
+	write("<option value='{0}'>{1}</option>".format(i,location),fwh)
+	# write("<div class='row'></div>",fwh)
+write("</select>",fwh)
+
 
 write("</div>",fwh)
 write("</body>",fwh)
