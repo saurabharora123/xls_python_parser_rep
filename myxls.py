@@ -11,7 +11,7 @@ import webbrowser
 import re
 import html
 
-###############################################################################
+################################################################################################
 folder = r"D:\Python33\python_2013\xls"
 _infile = "in.xls"
 _outfile = "out.html"
@@ -20,22 +20,25 @@ outlocation = "{}\\{}".format(folder,_outfile)
 frh = xlrd.open_workbook(inlocation)
 sheets = frh.sheet_names()
 sheetdata = {}
-###############################################################################
+location_indices = []
+################################################################################################
 datepattern = re.compile(r"date:\s([0-9]+)/([0-9]+)/.*",re.I)
 def write(line,fh): print(line,end="",file=fh)
-###############################################################################
+################################################################################################
 for name in sheets:
 	sheet = frh.sheet_by_name(name)
 	rawdatetime = sheet.cell_value(2,1)
 	match = re.search(datepattern,rawdatetime)
 	sheetdata[str(match.group(1)).lstrip("0")] = sheet
-###############################################################################
+################################################################################################
 # http://www.python.org/dev/peps/pep-0008/#descriptive-naming-styles
 # class vs. class_
-for key_ in sheetdata.keys():
+for e,key_ in enumerate(sheetdata.keys()):
+	############################################################################################
 	sheet = sheetdata[key_]
 	i = 0
 	locations = []
+	############################################################################################
 	while(i < sheet.nrows):
 		(p,n) = (sheet.cell_value(i,0),sheet.cell_value(i,1))
 		i += 1
@@ -44,6 +47,7 @@ for key_ in sheetdata.keys():
 		next_pattern_b = re.compile(r"^([a-z]+[\.]?[\s]?-[\s]?[a-z]+[\s]?[0-9]?).*$",re.I)
 		next_pattern_c = re.compile(r"^([a-z]+[\.]?[\s]+[a-z]+[\s]?[a-z]+[\s]?[a-z]+).*$",re.I)
 		if re.search(prevpattern,str(p)):
+			if e==0: location_indices.append(i-1)
 			match_a = re.search(next_pattern_a,str(n))
 			match_b = re.search(next_pattern_b,str(n))
 			match_c = re.search(next_pattern_c,str(n))
@@ -59,7 +63,8 @@ for key_ in sheetdata.keys():
 	sheetdata[key_]["locations"] = []
 	sheetdata[key_]["locations"].extend(locations)
 for key_ in sheetdata.keys(): print("{}: ".format(key_).ljust(5), sheetdata[key_]["locations"])
-
+print("Indices: {}".format(location_indices))
+################################################################################################
 fwh = open(outlocation,"w+t")
 head = \
 '''
@@ -138,13 +143,7 @@ write("<div class='main'>",fwh)
 keys = list(sheetdata.keys())
 set_ = sheetdata[keys[0]]["locations"]
 #
-from tkinter import *
-root = Tk()
-root.title("Clipboard")
-# root.withdraw()
-root.clipboard_clear()
-root.clipboard_append(set_)
-root.mainloop() # style
+
 #
 print("Duplicates: ", list(set([x for x in set_ if set_.count(x) > 1])))
 
@@ -159,4 +158,5 @@ write("</select>",fwh)
 write("</div>",fwh)
 write("</body>",fwh)
 fwh.close()
-webbrowser.open_new(outlocation)
+################################################################################################
+# webbrowser.open_new(outlocation)
