@@ -11,7 +11,7 @@ import webbrowser
 import re
 import html
 
-################################################################################################
+##############################################################################################################
 folder = r"D:\Python33\python_2013\xls"
 _infile = "in.xls"
 _outfile = "out.html"
@@ -21,24 +21,24 @@ frh = xlrd.open_workbook(inlocation)
 sheets = frh.sheet_names()
 sheetdata = {}
 location_indices = []
-################################################################################################
+##############################################################################################################
 datepattern = re.compile(r"date:\s([0-9]+)/([0-9]+)/.*",re.I)
 def write(line,fh): print(line,end="",file=fh)
-################################################################################################
+##############################################################################################################
 for name in sheets:
 	sheet = frh.sheet_by_name(name)
 	rawdatetime = sheet.cell_value(2,1)
 	match = re.search(datepattern,rawdatetime)
 	sheetdata[str(match.group(1)).lstrip("0")] = sheet
-################################################################################################
+##############################################################################################################
 # http://www.python.org/dev/peps/pep-0008/#descriptive-naming-styles
 # class vs. class_
 for e,key_ in enumerate(sheetdata.keys()):
-	############################################################################################
+	##########################################################################################################
 	sheet = sheetdata[key_]
 	i = 0
 	locations = []
-	############################################################################################
+	##########################################################################################################
 	while(i < sheet.nrows):
 		(p,n) = (sheet.cell_value(i,0),sheet.cell_value(i,1))
 		i += 1
@@ -62,9 +62,46 @@ for e,key_ in enumerate(sheetdata.keys()):
 	sheetdata[key_] = {}
 	sheetdata[key_]["locations"] = []
 	sheetdata[key_]["locations"].extend(locations)
-for key_ in sheetdata.keys(): print("{}: ".format(key_).ljust(5), sheetdata[key_]["locations"])
-print("Indices: {}".format(location_indices))
-################################################################################################
+# for key_ in sheetdata.keys(): print("{}: ".format(key_).ljust(5), sheetdata[key_]["locations"])
+# print("Indices: {}".format(location_indices))
+##############################################################################################################
+# 3,4,5 VSAT-CANOPY
+# 6,7,8 MPLS-RELIANCE
+# 9,10,11 MPLS-BSNL
+# Status, Availability, RoundTripDelay
+'''
+sheetdata[key_]:{ # key_ = date
+	locations:[a,b,c,] # for location in date["locations"]: pass
+	data:{
+		VSAT-CANOPY:[(a1,b1,c1),(a2,b2,c2),(a3,b3,c3),] # for s,a,r in date["data"]["VSAT-CANOPY"]: pass
+		MPLS-RELIANCE:[(a1,b1,c1),(a2,b2,c2),(a3,b3,c3),] # for s,a,r in date["data"]["MPLS-RELIANCE"]: pass
+		MPLS-BSNL:[(a1,b1,c1),(a2,b2,c2),(a3,b3,c3),] # for s,a,r in date["data"]["MPLS-BSNL"]: pass
+	}
+}
+'''
+data_a_name = "VSAT-CANOPY"
+data_b_name = "MPLS-RELIANCE"
+data_c_name = "MPLS-BSNL"
+data_a = data_b = data_c = [] # VSAT-CANOPY, MPLS-RELIANCE, MPLS-BSNL
+for name in sheets:
+	sheet = frh.sheet_by_name(name)
+	for i in location_indices:
+		a = (sheet.cell_value(i,2),sheet.cell_value(i,3),sheet.cell_value(i,4))
+		b = (sheet.cell_value(i,5),sheet.cell_value(i,6),sheet.cell_value(i,7))
+		c = (sheet.cell_value(i,8),sheet.cell_value(i,9),sheet.cell_value(i,10))
+		data_a.append(a)
+		data_b.append(b)
+		data_c.append(c)
+for key_ in sheetdata.keys():
+	sheetdata[key_]["data"] = {}
+	sheetdata[key_]["data"][data_a_name] = data_a
+	sheetdata[key_]["data"][data_b_name] = data_b
+	sheetdata[key_]["data"][data_c_name] = data_c
+for key_ in sheetdata.keys():
+	print(key_,end=">>>\n")
+	for key__ in sheetdata[key_].keys():
+		print(key__,sheetdata[key_][key__])
+##############################################################################################################
 fwh = open(outlocation,"w+t")
 head = \
 '''
@@ -75,13 +112,11 @@ html,body,div {
 	margin: 0;
 }
 body {
-	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* IE10+ */
-	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#00ffffff", GradientType=0); /* IE6-9 */
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
 	background-image: url("bg.jpg");
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -142,10 +177,10 @@ write("<body>",fwh)
 write("<div class='main'>",fwh)
 keys = list(sheetdata.keys())
 set_ = sheetdata[keys[0]]["locations"]
-#
-
-#
-print("Duplicates: ", list(set([x for x in set_ if set_.count(x) > 1])))
+'''
+tkinter code
+'''
+# print("Duplicates: ", list(set([x for x in set_ if set_.count(x) > 1])))
 
 
 write("<select>",fwh)
@@ -158,5 +193,5 @@ write("</select>",fwh)
 write("</div>",fwh)
 write("</body>",fwh)
 fwh.close()
-################################################################################################
+##############################################################################################################
 # webbrowser.open_new(outlocation)
